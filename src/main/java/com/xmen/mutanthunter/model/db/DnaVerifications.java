@@ -1,6 +1,5 @@
 package com.xmen.mutanthunter.model.db;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

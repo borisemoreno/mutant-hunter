@@ -10,6 +10,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface DnaVerificationsRepository extends CrudRepository<DnaVerifications, UUID> {
+    @Query(value = "FROM DnaVerifications d where d.dna = ?1")
     Optional<DnaVerifications> findByDna(String dna);
 
     @Query(value = "select new com.xmen.mutanthunter.model.StatsDto(count(d.id), d.mutant) from DnaVerifications d group by d.mutant")

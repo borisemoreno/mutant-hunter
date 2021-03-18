@@ -118,11 +118,11 @@ public class MutantService implements MutantServiceInterface {
      */
     public StatsResponse getStats() {
         List<StatsDto> statsDto = dnaVerificationsRepository.getStats();
-        Long mutants = statsDto.stream().filter(r -> r.isMutants()).collect(Collectors.counting());
-        Long humans = statsDto.stream().filter(r -> !r.isMutants()).collect(Collectors.counting());
+        Long mutants = statsDto.stream().filter(r -> r.isMutants()).collect(Collectors.summarizingLong(value -> value.getCounts())).getSum();
+        Long humans = statsDto.stream().filter(r -> !r.isMutants()).collect(Collectors.summarizingLong(value -> value.getCounts())).getSum();
         return new StatsResponse(
                 mutants,
                 humans,
-                humans == 0 ? 0 : mutants / humans);
+                humans == 0 ? 0 : (float)mutants / (float)humans);
     }
 }

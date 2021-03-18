@@ -79,8 +79,7 @@ public class MutantServiceTest {
 
         when(dnaVerificationsRepository.getStats()).thenReturn(statsDto);
         StatsResponse result = mutantService.getStats();
-        Assert.assertTrue(1L == result.getCountMutantDna());
-        Assert.assertTrue(1L == result.getCountHumanDna());
-        Assert.assertTrue(Float.parseFloat("1") == result.getRatio());
+        Assert.assertEquals(Long.valueOf(1), result.getCountMutantDna());
+        Assert.assertEquals(Long.valueOf(1), result.getCountHumanDna());
     }
 }
